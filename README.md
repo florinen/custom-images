@@ -1,3 +1,3 @@
 ## Custom-images
 
-Building custom docker images with Jenkins. Multibranch repo for each buid
+Building custom docker images with Jenkins. Multibranch repo for each build
