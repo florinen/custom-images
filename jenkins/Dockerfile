@@ -1,6 +1,8 @@
 FROM centos:7
 
-MAINTAINER Florin Nenciu <nenfl@yahoo.com>
+LABEL Maintainer="Florin" \
+      Email="nenfl@yahoo.com" \
+      Version="1.0"       
 
 ENV datadir /var/data
 ENV appname jenkins
