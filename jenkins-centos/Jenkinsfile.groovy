@@ -19,7 +19,7 @@ node {
   stage('Build docker image') {
 
       // Build the docker image
-      app = docker.build("florinen/centos_jenkins", "-f ${WORKSPACE}/jenkins/Dockerfile .")
+      app = docker.build("florinen/centos_jenkins", "-f ${WORKSPACE}/jenkins-centos/Dockerfile .")
   }
 
 
