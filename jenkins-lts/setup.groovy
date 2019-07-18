@@ -1,5 +1,11 @@
 import jenkins.model.*
 import hudson.security.*
+import hudson.*
+import hudson.model.*
+import jenkins.*
+import java.util.*
+import com.michelin.cio.hudson.plugins.rolestrategy.*
+import java.lang.reflect.*
 
 def env = System.getenv()
 
@@ -13,5 +19,7 @@ if(!(jenkins.getAuthorizationStrategy() instanceof GlobalMatrixAuthorizationStra
 def user = jenkins.getSecurityRealm().createAccount(env.JENKINS_USER, env.JENKINS_PASS)
 user.save()
 jenkins.getAuthorizationStrategy().add(Jenkins.ADMINISTER, env.JENKINS_USER)
+Jenkins.instance.getInjector().getInstance(AdminWhitelistRule.class)
+.setMasterKillSwitch(false)
 
 jenkins.save()
