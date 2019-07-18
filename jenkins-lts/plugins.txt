@@ -43,3 +43,4 @@ aws-global-configuration
 aws-credentials
 aws-java-sdk
 structs
+authorize-project
