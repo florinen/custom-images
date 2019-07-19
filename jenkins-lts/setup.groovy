@@ -8,6 +8,17 @@ import com.michelin.cio.hudson.plugins.rolestrategy.*
 import java.lang.reflect.*
 
 def env = System.getenv()
+def jenkinsParameters = [
+  "email":  "System Admin <admin@jenkins.com>",
+  "url":    "http://jenkins.varu.local:8080"
+  ]
+// get Jenkins location configuration
+def jenkinsLocationConfiguration = JenkinsLocationConfiguration.get()
+
+jenkinsLocationConfiguration.setAdminAddress(jenkinsParameters.email)
+jenkinsLocationConfiguration.setUrl(jenkinsParameters.url)
+
+jenkinsLocationConfiguration.save()
 
 // Create user 
 def jenkins = Jenkins.getInstance()
@@ -23,23 +34,10 @@ jenkins.getAuthorizationStrategy().add(Jenkins.ADMINISTER, env.JENKINS_USER)
 
 // Set access control for builds
 Jenkins.instance.getInjector().getInstance(AdminWhitelistRule.class)
-.setMasterKillSwitch(false)
+ .setMasterKillSwitch(false)
 // Save Jenkins
-jenkins.save()
+    jenkins.save()
 
-// Set URL and email
-// parameters
 
-def jenkinsParameters = [
-  email:  'Jenkins Admin <admin@jenkins.com>',
-//url:    'https://ci.jenkins.com:8083/'
-]
-// get Jenkins location configuration
-
-def jenkinsLocationConfiguration = JenkinsLocationConfiguration.get()
-//jenkinsLocationConfiguration.setUrl(jenkinsParameters.url)
-jenkinsLocationConfiguration.setAdminAddress(jenkinsParameters.email)
-// Save jenkinsLocationConfiguration
-jenkinsLocationConfiguration.save()
 
 
