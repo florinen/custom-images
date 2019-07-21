@@ -9,6 +9,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && wget -O /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.12.3/terraform_0.12.3_linux_amd64.zip \
     && unzip /tmp/terraform.zip -d /bin
 USER jenkins
-COPY setup.groovy /usr/share/jenkins/ref/init.groovy.d/
+COPY scripts/ /usr/share/jenkins/ref/init.groovy.d/
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
