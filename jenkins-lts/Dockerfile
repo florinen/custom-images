@@ -2,6 +2,8 @@ FROM jenkins/jenkins:2.176.2
 LABEL Maintainer="Florin" \
       Version="1.1"       
 ENV JAVA_OPTS "-Djenkins.install.runSetupWizard=false"
+# ENV DOCKERVERSION=18.09.8-ce
+
 USER root
 RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip wget \
