@@ -19,6 +19,8 @@ RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${
 
 ## Run other tasks as non root user
 USER jenkins
+
+## For jenkins pipeline build please use full path of dir you are copying
 COPY /jenkins-lts/scripts/ /usr/share/jenkins/ref/init.groovy.d/
-COPY plugins.txt /usr/share/jenkins/plugins.txt
+COPY /jenkins-lts/plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
