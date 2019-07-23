@@ -44,3 +44,4 @@ aws-credentials
 aws-java-sdk
 structs
 authorize-project
+github-branch-source
