@@ -21,7 +21,9 @@ node {
       // Build the docker image
       app = docker.build("florinen/jenkins", "-f ${WORKSPACE}/jenkins-lts/Dockerfile .")
   }
-
+  stage('Copy scripts') {
+    // Copy scripts to image
+    sh 'cp ${WORKSPACE}/jenkins-lts/scripts/ /usr/share/jenkins/ref/init.groovy.d/'
 
   stage('Push image') {
 
