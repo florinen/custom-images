@@ -1,7 +1,8 @@
 import hudson.EnvVars
 
 def app
-
+def repo = 'florinen/jenkins'
+def Dockerfile = 'jenkins-lts/Dockerfile'
 
 properties([
   parameters([
@@ -19,7 +20,7 @@ node {
   stage('Build docker image') {
 
       // Build the docker image
-      app = docker.build("florinen/jenkins", "-f ${WORKSPACE}/jenkins-lts/Dockerfile .")
+      app = docker.build("${repo}", "-f ${WORKSPACE}/${Dockerfile} .")
   }
   
 
