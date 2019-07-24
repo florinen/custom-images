@@ -45,3 +45,4 @@ aws-java-sdk
 structs
 authorize-project
 github-branch-source
+workflow-multibranch
