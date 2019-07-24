@@ -19,16 +19,20 @@ node {
 
   stage('Build docker image')
   when {
-                branch 'grafana'
-            }
-             {
+        branch 'grafana'
+        }
+        steps {
 
       // Build the docker image
       app = docker.build("${repo}", "-f ${WORKSPACE}/${Dockerfile} .")
   }
   
 
-  stage('Push image') {
+  stage('Push image')
+  when {
+        branch 'development'
+        }
+        steps {
 
      // Push docker image to the Docker hub
       docker.withRegistry('', 'dockerhub-cred') {
