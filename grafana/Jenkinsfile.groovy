@@ -17,7 +17,11 @@ node {
   // Pooling the docker image
   checkout scm
 
-  stage('Build docker image') {
+  stage('Build docker image')
+  when {
+                branch 'grafana'
+            }
+             {
 
       // Build the docker image
       app = docker.build("${repo}", "-f ${WORKSPACE}/${Dockerfile} .")
