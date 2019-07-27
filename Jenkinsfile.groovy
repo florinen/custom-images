@@ -18,9 +18,6 @@ node {
   checkout scm
 
   stage('Build docker image') {
-    when {
-      branch 'grafana'
-   }
 
       // Build the docker image
       custom_image = docker.build("${repo}", "-f ${WORKSPACE}/${Dockerfile} .")
@@ -28,9 +25,7 @@ node {
   
 
   stage('Push image') {
-    when {
-      branch 'grafana'
-   }
+   
 
      // Push docker image to the Docker hub
       docker.withRegistry('', 'dockerhub-cred') {
