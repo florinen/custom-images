@@ -7,3 +7,5 @@ RUN grafana-cli plugins install grafana-kubernetes-app
 WORKDIR /
 
 ENTRYPOINT [ "/run.sh" ]
+
+
