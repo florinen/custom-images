@@ -1,8 +1,8 @@
 import hudson.EnvVars
 
-def app
-
-
+def custom_image
+def Dockerfile = 'jenkins-centos/Dockerfile'
+def repo = 'florinen/centos_jenkins'
 properties([
   parameters([
     booleanParam(defaultValue: false,
@@ -19,7 +19,7 @@ node {
   stage('Build docker image') {
 
       // Build the docker image
-      app = docker.build("florinen/centos_jenkins", "-f ${WORKSPACE}/jenkins-centos/Dockerfile .")
+      custom_image = docker.build("${repo}", "-f ${WORKSPACE}/${Dockerfile} .")
   }
 
 
@@ -27,10 +27,10 @@ node {
 
      // Push docker image to the Docker hub
       docker.withRegistry('', 'dockerhub-cred') {
-          app.push("0.${BUILD_NUMBER}")
+          custom_image.push("0.${BUILD_NUMBER}")
           // If push to latest parameters selected
           if (params.PUSH_LATEST){
-            app.push("latest")
+            custom_image.push("latest")
           }
       }
   }
