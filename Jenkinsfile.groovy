@@ -1,6 +1,9 @@
-
+import hudson.EnvVars
 
 master
+def custom_image
+def repo = 'florinen/grafana'
+def Dockerfile = 'grafana/Dokerfile'
 
 node {
 
@@ -10,7 +13,7 @@ node {
   stage('Build docker image') {
 
       // Build the docker image
-      app = docker.build("${repo}", "-f ${WORKSPACE}/${Dockerfile} .")
+      custom_image = docker.build("${repo}", "-f ${WORKSPACE}/${Dockerfile} .")
   }
   
 
@@ -18,10 +21,10 @@ node {
 
      // Push docker image to the Docker hub
       docker.withRegistry('', 'dockerhub-cred') {
-          app.push("0.${BUILD_NUMBER}")
+          custom_image.push("0.${BUILD_NUMBER}")
           // If push to latest parameters selected
           if (params.PUSH_LATEST){
-            app.push("latest")
+            custom_image.push("latest")
           }
       }
   }
