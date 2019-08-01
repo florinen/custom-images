@@ -6,7 +6,7 @@ FROM grafana/grafana:6.2.4
 #ENV PATH=/usr/share/grafana/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
 ENV GF_PATHS_PLUGINS="/var/lib/grafana/plugins" 
 
-ARG GF_INSTALL_PLUGINS="grafana-kubernetes-app,grafana-clock-panel,grafana-simple-json-datasource"
+ARG GF_INSTALL_PLUGINS="kubernetes-app"
 
 RUN if [ ! -z "${GF_INSTALL_PLUGINS}" ]; then \
     OLDIFS=$IFS; \
