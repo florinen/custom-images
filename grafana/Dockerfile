@@ -1,14 +1,14 @@
 FROM grafana/grafana:6.2.4
 
-ARG GF_UID="472"
-ARG GF_GID="472"
+# ARG GF_UID="472"
+# ARG GF_GID="472"
 
-ENV PATH=/usr/share/grafana/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
-    GF_PATHS_PLUGINS="/var/lib/grafana/plugins" 
+#ENV PATH=/usr/share/grafana/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+ENV GF_PATHS_PLUGINS="/var/lib/grafana/plugins" 
 
-ARG GF_INSTALL_PLUGINS="grafana-kubernetes-app"
-
-RUN if [ ! -z "${GF_INSTALL_PLUGINS}" ]; then \
+ARG GF_INSTALL_PLUGINS="grafana-kubernetes-app,grafana-clock-panel,grafana-simple-json-datasource"
+RUN apt-get update && apt-get upgrade -y && \
+if [ ! -z "${GF_INSTALL_PLUGINS}" ]; then \
     OLDIFS=$IFS; \
         IFS=','; \
     for plugin in ${GF_INSTALL_PLUGINS}; do \
@@ -20,9 +20,6 @@ fi
  
 EXPOSE 3000
 
-#COPY ./run.sh /run.sh
-
-USER grafana
 WORKDIR /
 ENTRYPOINT [ "/run.sh" ]
 
