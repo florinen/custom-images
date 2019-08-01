@@ -1,4 +1,4 @@
-FROM grafana/grafana:6.2.4
+FROM grafana/grafana:latest
 
 # ARG GF_UID="472"
 # ARG GF_GID="472"
