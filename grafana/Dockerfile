@@ -7,8 +7,8 @@ FROM grafana/grafana:6.2.4
 ENV GF_PATHS_PLUGINS="/var/lib/grafana/plugins" 
 
 ARG GF_INSTALL_PLUGINS="grafana-kubernetes-app,grafana-clock-panel,grafana-simple-json-datasource"
-RUN apt-get update && apt-get upgrade -y && \
-if [ ! -z "${GF_INSTALL_PLUGINS}" ]; then \
+
+RUN if [ ! -z "${GF_INSTALL_PLUGINS}" ]; then \
     OLDIFS=$IFS; \
         IFS=','; \
     for plugin in ${GF_INSTALL_PLUGINS}; do \
