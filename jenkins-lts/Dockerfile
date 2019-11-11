@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.176.2
+FROM jenkins/jenkins:2.190.2
 LABEL Maintainer="Florin" \
       Version="1.2"       
 ENV JAVA_OPTS "-Djenkins.install.runSetupWizard=false"
